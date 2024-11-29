@@ -42,45 +42,47 @@ import {default as Loki} from 'lokijs'
 import {v4 as uuid} from 'uuid'
 
 const makeInMemoryDb = () => {
-    const localDb = []
-
+    const localDb = [];
+  
     return {
-        create: (user) => {
-            const storedUser = {
-                ...user,
-                id: uuid()
-            }
-
-            localDb.push(storedUser)
-
-            return storedUser
-        },
-        getById: (id) => {
-            return localDb.find(user => user.id === id) || undefined
-        }
-    }
-}
+      create: (user) => {
+        const storedUser = {
+          ...user,
+          id: uuid(),
+        };
+        localDb.push(storedUser);
+        return storedUser;
+      },
+      getById: (id) => {
+        return localDb.find((user) => user.id === id) || undefined;
+      },
+      getAll: () => {
+        return [...localDb];
+      },
+    };
+};
 
 const makeNewLokiDatabase = () => {
     const db = new Loki('sandbox.db');
     const users = db.addCollection('users');
-
+  
     return {
-        create: (user) => {
-            const storedUser = {
-                ...user,
-                id: uuid()
-            }
-
-            users.insert(storedUser)
-
-            return storedUser
-        },
-        getById: (id) => {
-            return users.findOne({id}) || undefined
-        }
-    }
-}
+      create: (user) => {
+        const storedUser = {
+          ...user,
+          id: uuid(),
+        };
+        users.insert(storedUser);
+        return storedUser;
+      },
+      getById: (id) => {
+        return users.findOne({ id }) || undefined;
+      },
+      getAll: () => {
+        return users.find();
+      },
+    };
+};
 
 /**
  * Db factory
