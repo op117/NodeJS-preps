@@ -9,9 +9,23 @@
  * - To install node dependencies you should first initialize npm
  * - Print the entire response to the console to see how it is structured.
  */
+import fetch from 'node-fetch';
 
-function printChuckNorrisJoke() {
-  // YOUR CODE GOES IN HERE
+async function printChuckNorrisJoke() {
+  try {
+    const response = await fetch('https://api.chucknorris.io/jokes/random');
+    
+    if (!response.ok) {
+      throw new Error(`HTTP Error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log('Full Response:', data);
+    console.log('Chuck Norris Joke:', data.value);
+
+  } catch (error) {
+    console.error('Error fetching joke:', error.message);
+  }
 
 }
 
