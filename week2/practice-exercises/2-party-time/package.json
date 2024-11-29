@@ -1,7 +1,7 @@
 {
-  "name": "1-joke-api",
+  "name": "2-party-time",
   "version": "1.0.0",
-  "description": "Chuck Norris jokes",
+  "description": "Party time",
   "main": "script.js",
   "type": "module",
   "scripts": {
@@ -12,6 +12,5 @@
   "license": "ISC",
   "dependencies": {
     "node-fetch": "^3.3.2"
-  },
-  "devDependencies": {}
+  }
 }
